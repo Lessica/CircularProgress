@@ -2,7 +2,59 @@
 
 A simple circular progress view for iOS.
 
+## TODOs
+
+- [ ] Gradient Colors
+- [ ] Shadow Paths & Colors
+- [ ] Multiplied Progress (i.e. `progress > 1.0`)
+
 ## Usage
+
+```swift
+import Foundation
+
+public struct CircularAnimation: Codable {
+    
+    public enum Style: Codable {
+        case linear
+        case easeInEaseOut
+        case spring
+    }
+    
+    public let duration: Double
+    public let style: Style
+    
+    // ...
+}
+
+public struct CircularColor: Codable {
+    
+    public let red: Double
+    public let green: Double
+    public let blue: Double
+    public let alpha: Double
+    
+    // ...
+}
+
+public struct CircularShape: Codable {
+    
+    public enum Direction: Codable {
+        case downward
+        case upward
+    }
+    
+    public let lineWidth: Double
+    public let outerRadius: Double
+    public let direction: Direction
+    
+    // ...
+}
+
+
+```
+
+## Grouped Usage
 
 ```swift
 let stackView = CircularProgressStackView()
