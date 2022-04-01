@@ -14,6 +14,13 @@ public struct CircularProgressConfiguration {
     public var animationDuration: TimeInterval? { animation?.duration }
     public var animationStyle: CircularAnimation.Style? { animation?.style }
     
+    public init(shape: CircularShape, fillColor: CircularColor, backgroundColor: CircularColor, animation: CircularAnimation? = nil) {
+        self.shape = shape
+        self.fillColor = fillColor
+        self.backgroundColor = backgroundColor
+        self.animation = animation
+    }
+    
     public static let defaultConfiguration = CircularProgressConfiguration(
         shape: CircularShape(
             lineWidth: 8.0,
