@@ -37,6 +37,7 @@ public class CircularProgressView: UIView {
     public convenience init(
         lineWidth: Double = CircularProgressConfiguration.defaultConfiguration.lineWidth,
         outerRadius: Double = CircularProgressConfiguration.defaultConfiguration.outerRadius,
+        direction: CircularShape.Direction = CircularProgressConfiguration.defaultConfiguration.direction,
         fillColor: CircularColor = CircularProgressConfiguration.defaultConfiguration.fillColor,
         backgroundColor: CircularColor = CircularProgressConfiguration.defaultConfiguration.backgroundColor,
         animationDuration: TimeInterval? = CircularProgressConfiguration.defaultConfiguration.animationDuration,
@@ -47,7 +48,8 @@ public class CircularProgressView: UIView {
         
         configuration.shape = CircularShape(
             lineWidth: lineWidth,
-            outerRadius: outerRadius
+            outerRadius: outerRadius,
+            direction: direction
         )
         
         configuration.fillColor = fillColor
@@ -105,7 +107,8 @@ public class CircularProgressView: UIView {
             outerRadius: configuration.outerRadius,
             fillColor: configuration.fillColor.cgColor,
             animationDuration: configuration.animationDuration,
-            animationStyle: configuration.animationStyle
+            animationStyle: configuration.animationStyle,
+            isUpsideDown: configuration.direction == .upward
         )
         
         progressLayer.frame = bounds

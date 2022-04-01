@@ -20,18 +20,21 @@ class ViewController: UIViewController {
         stackView.spacing = 6
         
         let redProgressView = CircularProgressView(
+            lineWidth: 24,
             fillColor: CircularColor.taleRed,
             backgroundColor: CircularColor.taleSecondaryRed
         )
         redProgressView.progressItem.progress = 0.75
         
         let greenProgressView = CircularProgressView(
+            lineWidth: 24,
             fillColor: CircularColor.taleGreen,
             backgroundColor: CircularColor.taleSecondaryGreen
         )
         greenProgressView.progressItem.progress = 0.7
         
         let blueProgressView = CircularProgressView(
+            lineWidth: 24,
             fillColor: CircularColor.taleBlue,
             backgroundColor: CircularColor.taleSecondaryBlue
         )

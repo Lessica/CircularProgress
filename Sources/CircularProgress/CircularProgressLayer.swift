@@ -62,6 +62,8 @@ class CircularProgressLayer: CALayer {
     let animationDuration: TimeInterval?
     let animationStyle: CircularAnimation.Style?
     
+    let isUpsideDown: Bool
+    
     @NSManaged var progress: Double
     
     init(
@@ -69,7 +71,8 @@ class CircularProgressLayer: CALayer {
         outerRadius: CGFloat, 
         fillColor: CGColor, 
         animationDuration: TimeInterval? = nil,
-        animationStyle: CircularAnimation.Style? = nil
+        animationStyle: CircularAnimation.Style? = nil,
+        isUpsideDown: Bool = false
     ) {
         
         self.lineWidth = lineWidth
@@ -78,6 +81,8 @@ class CircularProgressLayer: CALayer {
         
         self.animationDuration = animationDuration
         self.animationStyle = animationStyle
+        
+        self.isUpsideDown = isUpsideDown
         
         super.init()
         self.frame = CGRect(
@@ -99,6 +104,7 @@ class CircularProgressLayer: CALayer {
             self.fillColor = other.fillColor
             self.animationDuration = other.animationDuration
             self.animationStyle = other.animationStyle
+            self.isUpsideDown = other.isUpsideDown
         } else {
             fatalError()
         }
@@ -152,15 +158,18 @@ class CircularProgressLayer: CALayer {
         let path = UIBezierPath(
             arcCenter: CGPoint(x: outerRadius, y: outerRadius),
             radius: outerRadius - lineWidth / 2, 
-            startAngle: -0.5 * .pi,
-            endAngle: -0.5 * .pi + 2 * .pi * progress, 
+            startAngle: (isUpsideDown ? 1 : -1) * 0.5 * .pi,
+            endAngle: (isUpsideDown ? 1 : -1) * 0.5 * .pi + 2 * .pi * progress,
             clockwise: true
+        ).cgPath.copy(
+            strokingWithWidth: lineWidth,
+            lineCap: .round,
+            lineJoin: .round,
+            miterLimit: 0
         )
         
-        ctx.setStrokeColor(fillColor)
-        ctx.setLineWidth(lineWidth)
-        ctx.setLineCap(.round)
-        ctx.addPath(path.cgPath)
-        ctx.strokePath()
+        ctx.setFillColor(fillColor)
+        ctx.addPath(path)
+        ctx.fillPath()
     }
 }
